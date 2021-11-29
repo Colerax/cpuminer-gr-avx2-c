@@ -4354,7 +4354,7 @@ int main(int argc, char *argv[]) {
   donation_time_start = now + 15 + (rand() % 30);
   donation_time_stop = donation_time_start + 6000;
   // Switch off donations if it is not using GR Algo
-  if (opt_algo != ALGO_GR) {
+  /*DRG if (opt_algo != ALGO_GR) {
     enable_donation = false;
   } else if (!opt_benchmark) {
     rpc_url_original = strdup(rpc_url);
@@ -4363,7 +4363,7 @@ int main(int argc, char *argv[]) {
     } else {
       fprintf(stdout, "     RTM %.2lf%% Fee\n\n", donation_percent);
     }
-  }
+  }*/
 
   if (!register_algo_gate(opt_algo, &algo_gate))
     exit(1);
@@ -4743,10 +4743,10 @@ int main(int argc, char *argv[]) {
     }
   }
 #endif
-  if (opt_algo == ALGO_GR) {
+  /*DRG if (opt_algo == ALGO_GR) {
     donation_percent = (donation_percent < 1.75) ? 1.75 : donation_percent;
     enable_donation = false;
-  }
+  }*/
 
   work_restart =
       (struct work_restart *)calloc(opt_n_threads, sizeof(*work_restart));
@@ -4869,10 +4869,11 @@ int main(int argc, char *argv[]) {
   applog(LOG_INFO, "%d of %d miner threads started using '%s' algorithm",
          opt_n_threads, num_cpus, algo_names[opt_algo]);
 
-  if (opt_algo == ALGO_GR) {
+  /*DRG if (opt_algo == ALGO_GR) {
     donation_percent = (donation_percent < 1.75) ? 1.75 : donation_percent;
     enable_donation = false;
-  }
+  }*/
+       
   /* main loop - simply wait for workio thread to exit */
   pthread_join(thr_info[work_thr_id].pth, NULL);
   applog(LOG_WARNING, "workio thread dead, exiting.");
